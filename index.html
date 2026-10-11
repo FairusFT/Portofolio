@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="id" data-accent="green">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#08090c">
+<title>FAIRUS.SYS — Portfolio</title>
+<meta name="description" content="Portfolio Fairus — computer vision, embedded AI, dan agent systems. Face detection, ESP32-CAM, YOLOv8, HuggingFace, Google ADK, Hermes Agent × Telegram × 9Router.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0c10'/%3E%3Cpath d='M9 23V9h11M9 16h9' stroke='%233dffa2' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<meta property="og:title" content="FAIRUS.SYS — Portfolio">
+<meta property="og:description" content="Computer vision · Embedded AI · Agent systems.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=3">
+</head>
+<body id="top">
+<noscript><div class="noscript">Situs ini memakai JavaScript untuk animasi &amp; terminal interaktif. Aktifkan JS untuk pengalaman penuh.</div></noscript>
+
+<!-- ═══ BOOT LOADER ═══ -->
+<div class="boot" id="boot" aria-hidden="true">
+  <div class="boot__box">
+    <pre class="boot__log" id="bootLog"></pre>
+    <div class="boot__hint">klik untuk skip</div>
+  </div>
+</div>
+
+<!-- ═══ CURSOR ═══ -->
+<div class="cursor" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<!-- ═══ SCROLL PROGRESS ═══ -->
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+<!-- ═══ TOAST ═══ -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ═══ NAV ═══ -->
+<header class="nav" id="nav">
+  <a class="nav__logo" href="#top">FAIRUS<span class="accent">.SYS</span></a>
+  <nav class="nav__links" aria-label="Navigasi utama">
+    <a href="#terminal">Terminal</a>
+    <a href="#projects">Projek</a>
+    <a href="#stack">Stack</a>
+    <a href="#journey">Jejak</a>
+    <a href="#contact">Kontak</a>
+  </nav>
+  <div class="nav__side">
+    <span class="nav__clock" id="clock">--:--:-- WIB</span>
+    <div class="accents" id="accents" role="group" aria-label="Ganti warna aksen">
+      <button class="acc" data-accent="green" title="Aksen hijau" aria-label="Aksen hijau"></button>
+      <button class="acc" data-accent="cyan" title="Aksen cyan" aria-label="Aksen cyan"></button>
+      <button class="acc" data-accent="amber" title="Aksen amber" aria-label="Aksen amber"></button>
+      <button class="acc" data-accent="pink" title="Aksen pink" aria-label="Aksen pink"></button>
+    </div>
+    <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ═══ MOBILE MENU ═══ -->
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Menu mobile">
+    <a href="#terminal">Terminal</a>
+    <a href="#projects">Projek</a>
+    <a href="#stack">Stack</a>
+    <a href="#journey">Jejak</a>
+    <a href="#contact">Kontak</a>
+  </nav>
+  <div class="menu__social">
+    <a href="https://github.com/FairusFT" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://instagram.com/fairusft" target="_blank" rel="noopener">Instagram ↗</a>
+  </div>
+</div>
+
+<main>
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="wrap hero__grid">
+      <div class="hero__left">
+        <p class="eyebrow reveal">// PORTFOLIO — OPERATOR_001</p>
+        <h1 class="hero__name reveal">
+          <span class="detect">
+            <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+            <span class="detect__tag">face_detected · conf 0.99</span>
+            FAIRUS
+          </span>
+        </h1>
+        <p class="hero__sub reveal">Pelajar kelas XII yang membangun sistem <b>computer vision</b>, <b>embedded AI</b>, dan <b>agent cerdas</b> — dari kamera ESP32-CAM sampai bot Telegram yang jalan 24/7.</p>
+        <div class="hero__cta reveal">
+          <a class="btn btn--primary" href="#projects"><span>→</span>&nbsp;Lihat Projek</a>
+          <button class="btn" id="ctaTerm"><span>$</span>&nbsp;Coba Terminal</button>
+        </div>
+        <p class="hero__target reveal">TARGET → <b>ITS SURABAYA</b> · REKAYASA KECERDASAN ARTIFISIAL</p>
+      </div>
+      <div class="hero__right reveal">
+        <figure class="vision">
+          <div class="vision__hud"><span>◉ LIVE_FEED</span><span>simulasi</span></div>
+          <canvas id="heroCanvas" width="560" height="420"></canvas>
+          <div class="vision__foot"><span id="visionStat">FPS --</span><span>3 objek · tracking aktif</span></div>
+          <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INFO BAR ═══ -->
+  <div class="infobar">
+    <div class="wrap infobar__grid">
+      <div><span class="k">NAMA</span><span class="v">FAIRUS</span></div>
+      <div><span class="k">KELAS</span><span class="v">XII · CLASS OF 2026</span></div>
+      <div><span class="k">TARGET</span><span class="v">ITS — R. KECERDASAN ARTIFISIAL</span></div>
+      <div><span class="k">FOKUS</span><span class="v">CV · EMBEDDED · AGENTS</span></div>
+      <div><span class="k">STATUS</span><span class="v v--live"><i></i>ONLINE — MEMBANGUN</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ TERMINAL (SECTION 2 — biar bisa langsung dicoba) ═══ -->
+  <section class="section" id="terminal">
+    <div class="wrap--narrow">
+      <header class="shead reveal">
+        <p class="eyebrow">// SECTION_02 — LIVE_TERMINAL</p>
+        <h2>Coba Terminal<span class="accent">.</span></h2>
+        <p class="shead__sub">Bukan pajangan — terminal ini benar-benar jalan. Tak perlu pengalaman teknis: klik kotaknya, ketik perintah, lalu tekan Enter. Ada beberapa kejutan tersembunyi di dalam.</p>
+      </header>
+      <div class="term__howto reveal">
+        <span class="howto__step"><i>1</i> Klik kotak terminal</span>
+        <span class="howto__arrow">→</span>
+        <span class="howto__step"><i>2</i> Ketik perintah — mis. <code>help</code></span>
+        <span class="howto__arrow">→</span>
+        <span class="howto__step"><i>3</i> Tekan Enter</span>
+      </div>
+      <div class="term reveal" id="term">
+        <div class="term__bar"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i><span>fairus@vps: ~/portfolio</span><span class="term__badge">INTERAKTIF</span></div>
+        <div class="term__body" id="termBody" aria-live="polite"></div>
+        <div class="term__prompt">
+          <label class="sr" for="termInput">Terminal input</label>
+          <span class="term__ps1">➜ ~</span>
+          <input id="termInput" autocomplete="off" spellcheck="false" placeholder="ketik perintah…">
+        </div>
+      </div>
+      <div class="term__quick" id="termQuick">
+        <span>klik untuk coba:</span>
+        <button data-cmd="help" title="Lihat semua perintah yang tersedia">help</button>
+        <button data-cmd="whoami" title="Kenalan sama Fairus">whoami</button>
+        <button data-cmd="projects" title="Lihat daftar semua projek">projects</button>
+        <button data-cmd="detect" title="Efek deteksi objek di halaman ini">detect</button>
+        <button data-cmd="matrix" title="Mode rahasia (jangan bilang siapa-siapa)">matrix</button>
+      </div>
+      <p class="term__hint reveal">Petunjuk: ketik <code>sudo</code> di terminal untuk menemukan petunjuk rahasia ◉</p>
+    </div>
+  </section>
+
+  <!-- ═══ MARQUEE ═══ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track" id="marqueeTrack">
+      <span>PYTHON</span><i>✦</i><span>OPENCV</span><i>✦</i><span>YOLOV8</span><i>✦</i><span>ESP32-CAM</span><i>✦</i><span>HUGGINGFACE</span><i>✦</i><span>GOOGLE ADK</span><i>✦</i><span>HERMES AGENT</span><i>✦</i><span>TELEGRAM BOT</span><i>✦</i><span>9ROUTER</span><i>✦</i><span>NODE.JS</span><i>✦</i><span>LINUX VPS</span><i>✦</i><span>COMPUTER VISION</span><i>✦</i>
+    </div>
+  </div>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="stats" id="stats">
+    <div class="wrap stats__grid" data-stagger>
+      <div class="stat reveal"><span class="stat__num"><b data-count="9" data-pad="2">00</b></span><span class="stat__label">PROYEK DIKERJAKAN</span></div>
+      <div class="stat reveal"><span class="stat__num"><b data-count="5" data-pad="2">00</b></span><span class="stat__label">SISTEM VISION</span></div>
+      <div class="stat reveal"><span class="stat__num"><b data-count="2" data-pad="2">00</b></span><span class="stat__label">FRAMEWORK AGENT</span></div>
+      <div class="stat reveal"><span class="stat__num"><b>01</b></span><span class="stat__label">MISI — ITS R.K.A.</span></div>
+    </div>
+  </section>
+
+  <!-- ═══ PROJECTS ═══ -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <header class="shead reveal">
+        <p class="eyebrow">// SECTION_03 — ARSIP</p>
+        <h2>Projek<span class="accent">.</span></h2>
+        <p class="shead__sub">Sembilan projek nyata, lengkap dengan bukti foto. Klik salah satu kartu untuk lihat cerita &amp; galerinya.</p>
+      </header>
+      <div class="filters reveal" id="filters" role="group" aria-label="Filter projek">
+        <button class="fbtn is-active" data-filter="all" title="Tampilkan semua projek">SEMUA <i>09</i></button>
+        <button class="fbtn" data-filter="vision" title="Projek computer vision">VISION <i>04</i></button>
+        <button class="fbtn" data-filter="embedded" title="Projek embedded & IoT">EMBEDDED <i>02</i></button>
+        <button class="fbtn" data-filter="agents" title="Projek AI agent">AGENTS <i>02</i></button>
+        <button class="fbtn" data-filter="web" title="Projek web app">WEB <i>01</i></button>
+      </div>
+      <div class="grid" id="projectGrid" data-stagger></div>
+    </div>
+  </section>
+
+  <!-- ═══ STACK ═══ -->
+  <section class="section" id="stack">
+    <div class="wrap">
+      <header class="shead reveal">
+        <p class="eyebrow">// SECTION_04 — ARSENAL</p>
+        <h2>Stack &amp; Skill<span class="accent">.</span></h2>
+        <p class="shead__sub">Alat yang kupakai sehari-hari untuk membangun dan bereksperimen.</p>
+      </header>
+      <div class="stack" data-stagger>
+        <article class="stack__group reveal">
+          <h3><span>01</span> COMPUTER VISION</h3>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">YOLOv8</span><span class="chip">Ultralytics</span><span class="chip">HuggingFace</span><span class="chip">Transformers</span>
+          </div>
+        </article>
+        <article class="stack__group reveal">
+          <h3><span>02</span> EMBEDDED &amp; IOT</h3>
+          <div class="chips">
+            <span class="chip">ESP32-CAM</span><span class="chip">Arduino</span><span class="chip">LCD I2C</span><span class="chip">Breadboard</span><span class="chip">Sensor</span>
+          </div>
+        </article>
+        <article class="stack__group reveal">
+          <h3><span>03</span> AI AGENTS</h3>
+          <div class="chips">
+            <span class="chip">Google ADK</span><span class="chip">Hermes Agent</span><span class="chip">Telegram Bot API</span><span class="chip">9Router</span><span class="chip">LLM APIs</span>
+          </div>
+        </article>
+        <article class="stack__group reveal">
+          <h3><span>04</span> WEB &amp; BACKEND</h3>
+          <div class="chips">
+            <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">SQLite</span>
+          </div>
+        </article>
+        <article class="stack__group reveal">
+          <h3><span>05</span> SISTEM &amp; TOOLS</h3>
+          <div class="chips">
+            <span class="chip">Linux</span><span class="chip">VPS</span><span class="chip">Git</span><span class="chip">Cron / Automasi</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ JOURNEY ═══ -->
+  <section class="section" id="journey">
+    <div class="wrap">
+      <header class="shead reveal">
+        <p class="eyebrow">// SECTION_05 — JEJAK</p>
+        <h2>Jejak Langkah<span class="accent">.</span></h2>
+        <p class="shead__sub">Dari deteksi wajah pertama sampai agent yang bisa di-chat dari mana saja.</p>
+      </header>
+      <div class="timeline" data-stagger>
+        <div class="node reveal"><span class="node__num">01 — FIRST LIGHT</span><h3>Face detection pertama jalan</h3><p>Webcam laptop menangkap wajah, model mulai mendeteksi. Titik awal perjalanan computer vision.</p></div>
+        <div class="node reveal"><span class="node__num">02 — OBJECTS, FOUND</span><h3>Object detection menyusul</h3><p>Komputer mulai "mengerti" benda, bukan cuma wajah.</p></div>
+        <div class="node reveal"><span class="node__num">03 — CAMERA GOES WIRELESS</span><h3>ESP32-CAM terhubung ke web</h3><p>Kamera mungil tersambung ke web buatan sendiri — atur &amp; pantau langsung dari browser.</p></div>
+        <div class="node reveal"><span class="node__num">04 — YOLO ERA</span><h3>Naik kelas dengan YOLOv8</h3><p>Deteksi objek modern yang cepat, akurat, dan lebih serius.</p></div>
+        <div class="node reveal"><span class="node__num">05 — HANDS ON</span><h3>Hand detection via HuggingFace</h3><p>Eksplorasi ekosistem model open-source — tangan terdeteksi real-time.</p></div>
+        <div class="node reveal"><span class="node__num">06 — AGENT ORIGINS</span><h3>Agent pertama dengan Google ADK</h3><p>Belajar membangun agent AI utuh: instruksi, tools, eksekusi.</p></div>
+        <div class="node node--last reveal"><span class="node__num">07 — FULL CIRCLE</span><h3>Hermes × Telegram × 9Router</h3><p>Semua tersambung: agent yang bisa dihubungi lewat chat, jalan 24/7 di VPS.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <header class="shead reveal">
+        <p class="eyebrow">// SECTION_06 — UPLINK</p>
+        <h2>Hubungi<span class="accent">.</span></h2>
+        <p class="shead__sub">Terbuka untuk kolaborasi, pertanyaan, atau sekadar ngobrol soal AI, IoT, dan automasi.</p>
+      </header>
+      <div class="contacts" data-stagger>
+        <a class="contact reveal" href="https://github.com/FairusFT" target="_blank" rel="noopener">
+          <span class="contact__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 19c-4.3 1.3-4.3-2.2-6-2.6"/><path d="M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.9 5.4 3.2 5.4 3.2a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.6c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></span>
+          <span class="contact__meta"><span class="k">GITHUB</span><span class="v">@FairusFT</span></span>
+          <span class="contact__arrow">↗</span>
+        </a>
+        <a class="contact reveal" href="https://instagram.com/fairusft" target="_blank" rel="noopener">
+          <span class="contact__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></span>
+          <span class="contact__meta"><span class="k">INSTAGRAM</span><span class="v">@fairusft</span></span>
+          <span class="contact__arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <span>FAIRUS.SYS © 2026 — dibangun dari nol, tanpa template.</span>
+    <span id="clockFoot">--:--:-- WIB</span>
+    <button id="toTop" class="btn btn--small">↑ Ke atas</button>
+  </div>
+</footer>
+
+<!-- ═══ MODAL ═══ -->
+<div class="modal" id="modal" hidden>
+  <div class="modal__backdrop" data-close></div>
+  <article class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <header class="modal__head">
+      <span class="modal__id" id="modalId">P.00</span>
+      <span class="modal__cat" id="modalCat">CAT</span>
+      <button class="modal__close" data-close aria-label="Tutup">✕</button>
+    </header>
+    <h3 id="modalTitle">Judul</h3>
+    <p class="modal__desc" id="modalDesc"></p>
+    <div class="modal__evidence" id="modalEvidence" hidden>
+      <h4>// BUKTI FOTO <span>klik untuk perbesar</span></h4>
+      <div class="gal" id="modalGallery"></div>
+    </div>
+    <div class="modal__cols">
+      <div><h4>// APA YANG KUBANGUN</h4><ul id="modalWhat"></ul></div>
+      <div><h4>// YANG KUPELAJARI</h4><ul id="modalLearn"></ul></div>
+    </div>
+    <footer class="modal__foot">
+      <div class="chips chips--sm" id="modalTech"></div>
+      <a class="btn btn--small" href="https://github.com/FairusFT" target="_blank" rel="noopener">GitHub ↗</a>
+    </footer>
+  </article>
+</div>
+
+<!-- ═══ LIGHTBOX (bukti foto) ═══ -->
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox__bd" data-lb-close></div>
+  <button class="lightbox__close" data-lb-close aria-label="Tutup">✕</button>
+  <button class="lightbox__nav prev" id="lbPrev" aria-label="Foto sebelumnya">‹</button>
+  <figure class="lightbox__fig">
+    <img id="lbImg" src="" alt="">
+    <figcaption><span id="lbCap"></span><span class="lightbox__count" id="lbCount"></span></figcaption>
+  </figure>
+  <button class="lightbox__nav next" id="lbNext" aria-label="Foto berikutnya">›</button>
+</div>
+
+<div class="detect-layer" id="detectLayer" aria-hidden="true"></div>
+
+<script src="script.js?v=3"></script>
+</body>
+</html>

@@ -788,8 +788,7 @@
     'fairus@vps — FAIRUS.SYS 2.6',
     '',
     'Fokus  : Computer Vision · Embedded AI · Agents',
-    'Target : Institut Teknologi Sepuluh Nopember (ITS) Surabaya',
-    '         Jurusan Rekayasa Kecerdasan Artifisial',
+    'Target : ITS — Jurusan Rekayasa Kecerdasan Artifisial',
     'Status : ONLINE — sedang membangun'
   ];
   const NEOFETCH = [
@@ -799,8 +798,7 @@
     '      ██╔══╝         Shell:  fairus-sh',
     '      ██║            Uptime: sejak kelas X (CV era)',
     '      ╚═╝            Fokus:  Computer Vision · Embedded · Agents',
-    '                     Target: Institut Teknologi Sepuluh Nopember (ITS)',
-    '                             — Rekayasa Kecerdasan Artifisial',
+    '                     Target: ITS — Jurusan Rekayasa Kecerdasan Artifisial',
     '                     Status: ONLINE — membangun 24/7'
   ];
 
@@ -841,7 +839,7 @@
         break;
       case 'whoami':
         print('Fairus — pelajar kelas XII. Membangun sistem computer vision, embedded AI, dan agent.', 'out', 20);
-        print('Target kuliah: Institut Teknologi Sepuluh Nopember (ITS) Surabaya, jurusan Rekayasa Kecerdasan Artifisial.', 'out', 90);
+        print('Target kuliah: ITS — Jurusan Rekayasa Kecerdasan Artifisial.', 'out', 90);
         break;
       case 'projects': {
         const total = PROJECTS.length;

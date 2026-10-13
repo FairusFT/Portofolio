@@ -2,7 +2,7 @@
 
 Portofolio interaktif yang dibangun dari nol tanpa template: **computer vision, embedded AI, dan agent systems**.
 
-🌐 Live: [http://187.77.119.118:3001](http://187.77.119.118:3001)
+🌐 **Live: [fairusft.github.io/Portofolio](https://fairusft.github.io/Portofolio/)** — juga tersedia di [http://187.77.119.118:3001](http://187.77.119.118:3001)
 
 ## Isi
 - **9 projek** dengan bukti foto asli (face detection, object detection, ESP32-CAM × Web, YOLOv8, hand detection, Google ADK, Hermes Agent × Telegram × 9Router, Arduino LCD I2C, web app)

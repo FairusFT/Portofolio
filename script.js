@@ -776,12 +776,22 @@
     setTimeout(() => {
       const div = document.createElement('div');
       div.className = `t-line ${cls}`;
+      if (/^\s{2,}\S/.test(text)) div.classList.add('t-li');
       div.textContent = text;
       termBody.appendChild(div);
       termBody.scrollTop = termBody.scrollHeight;
+      termBody.classList.toggle('is-scrolled', termBody.scrollTop > 6);
     }, delay);
   };
 
+  const NEOFETCH_MOBILE = [
+    'fairus@vps — FAIRUS.SYS 2.6',
+    '',
+    'Fokus  : Computer Vision · Embedded AI · Agents',
+    'Target : Institut Teknologi Sepuluh Nopember (ITS) Surabaya',
+    '         Jurusan Rekayasa Kecerdasan Artifisial',
+    'Status : ONLINE — sedang membangun'
+  ];
   const NEOFETCH = [
     '       ██████╗       fairus@vps',
     '      ██╔════╝       ─────────────',
@@ -789,7 +799,8 @@
     '      ██╔══╝         Shell:  fairus-sh',
     '      ██║            Uptime: sejak kelas X (CV era)',
     '      ╚═╝            Fokus:  Computer Vision · Embedded · Agents',
-    '                     Target: ITS — Rekayasa Kecerdasan Artifisial',
+    '                     Target: Institut Teknologi Sepuluh Nopember (ITS)',
+    '                             — Rekayasa Kecerdasan Artifisial',
     '                     Status: ONLINE — membangun 24/7'
   ];
 
@@ -829,16 +840,22 @@
         print('tips: Tab = lengkapi otomatis · ↑/↓ = riwayat perintah', 'dim', 180 + HELP_LIST.length * 30);
         break;
       case 'whoami':
-        print('Fairus — pelajar kelas XII · pembangun sistem computer vision, embedded AI, dan agent.', 'out', 20);
-        print('jalan di laptop + kamera ESP32-CAM + VPS kecil. target: ITS Rekayasa Kecerdasan Artifisial.', 'out', 90);
+        print('Fairus — pelajar kelas XII. Membangun sistem computer vision, embedded AI, dan agent.', 'out', 20);
+        print('Target kuliah: Institut Teknologi Sepuluh Nopember (ITS) Surabaya, jurusan Rekayasa Kecerdasan Artifisial.', 'out', 90);
         break;
-      case 'projects':
+      case 'projects': {
+        const total = PROJECTS.length;
         PROJECTS.forEach((p, i) => {
-          const n = (p.evidence && p.evidence.length) || 0;
-          print(`  ${String(i + 1).padStart(2, '0')}  [${p.id}] ${p.title}${n ? `  (${n} foto)` : ''}`, 'out', 20 + i * 50);
+          const t0 = 30 + i * 90;
+          const fotos = (p.evidence && p.evidence.length) || 0;
+          const cat = {vision: 'Computer Vision', embedded: 'Embedded & IoT', agents: 'AI Agent', web: 'Web App'}[p.cat] || p.cat;
+          print(`${String(i + 1).padStart(2, '0')}. ${p.title}`, 'out t-item', t0);
+          print(`kategori ${cat}${fotos ? ` · ${fotos} foto bukti` : ''}`, 'dim t-cat', t0 + 40);
+          if (i < total - 1) print('', 't-sp', t0 + 65);
         });
-        print('ketik: project <nomor> untuk cerita lengkapnya', 'dim', 40 + PROJECTS.length * 50);
+        print('ketik "project <nomor>" untuk cerita lengkapnya', 't-note', 30 + total * 90 + 40);
         break;
+      }
       case 'project': {
         const n = parseInt(args[0], 10);
         const p = PROJECTS[n - 1];
@@ -876,9 +893,12 @@
         else print('pilihan: green | cyan | amber | pink', 'err', 20);
         break;
       }
-      case 'neofetch':
-        NEOFETCH.forEach((l, i) => print(l, i === 0 ? 'acc' : 'out', 20 + i * 55));
+      case 'neofetch': {
+        const narrow = matchMedia('(max-width:760px)').matches;
+        const lines = narrow ? NEOFETCH_MOBILE : NEOFETCH;
+        lines.forEach((l, i) => print(l, i === 0 ? 'acc' : 'out', 20 + i * 55));
         break;
+      }
       case 'matrix':
         print('initiating matrix rain… (jangan bilang siapa-siapa)', 'acc', 20);
         setTimeout(matrixRain, 400);
@@ -915,6 +935,9 @@
   };
 
   if (termRoot && termInput && termBody) {
+    termBody.addEventListener('scroll', () => {
+      termBody.classList.toggle('is-scrolled', termBody.scrollTop > 6);
+    }, { passive: true });
     print('FAIRUS.SYS terminal — versi ramah pengunjung', 'dim', 300);
     print('ketik "help" untuk lihat semua perintah, atau klik tombol di bawah terminal.', 'acc', 650);
 

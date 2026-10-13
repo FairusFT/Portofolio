@@ -169,6 +169,7 @@ body.ready .detect__tag{opacity:1;transform:none}
 .infobar__grid>div:first-child{border-left:0}
 .infobar .k{font-family:var(--font-m);font-size:.62rem;letter-spacing:.2em;color:var(--dim)}
 .infobar .v{font-family:var(--font-m);font-size:.76rem;letter-spacing:.04em;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.infobar .v--wrap{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.5}
 .v--live{color:var(--accent)!important}
 .v--live i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:.5rem;animation:pulse 2s ease infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--accent-soft)}50%{box-shadow:0 0 0 6px transparent}}
@@ -261,12 +262,29 @@ body.ready .detect__tag{opacity:1;transform:none}
 .term__body .t-line{white-space:pre-wrap;word-break:break-word;animation:tIn .18s ease both}
 @keyframes tIn{from{opacity:0;transform:translateY(3px)}}
 .t-line.in{color:var(--text)}
-.t-line.in::first-letter{color:var(--accent)}
+.term__body .t-line.in::first-letter{color:var(--accent)}
 .t-line.out{color:var(--muted)}
 .t-line.acc{color:var(--accent)}
 .t-line.err{color:#ff7a8a}
 .t-line.head{color:var(--text)}
 .t-line.dim{color:var(--dim)}
+/* hanging indent global: baris yang wrap tetap menjorok rapi, tidak balik ke kolom 0 */
+.term__body .t-line{padding-left:3ch;text-indent:-3ch}
+.term__body .t-line::first-letter{color:inherit}
+.t-line+.t-line{margin-top:1px}
+/* item projek: kontinuitas wrap sejajar teks judul */
+.term__body .t-line.t-item{padding-left:4.3ch;text-indent:-4.3ch}
+.term__body .t-line.t-item::first-letter{color:inherit}
+/* kategori: menjorok sejajar judul, kontras cukup */
+.term__body .t-line.t-cat{padding-left:4.3ch;text-indent:0;color:#a2aebc;font-size:.94em;margin-top:2px}
+.term__body .t-line.t-cat::first-letter{color:inherit}
+/* spacer antar item */
+.term__body .t-line.t-sp{height:.7em;min-height:.7em;padding:0;text-indent:0}
+/* catatan penutup list: garis pemisah, tidak menyatu dengan item */
+.term__body .t-line.t-note{margin-top:10px;padding:9px 0 0;border-top:1px solid var(--line2);color:#7f8b99;text-indent:0;padding-left:0}
+.term__body .t-line.t-note::first-letter{color:inherit}
+/* fade atas saat sudah discroll — tanda halus "ada konten di atas" */
+.term__body.is-scrolled{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 22px);mask-image:linear-gradient(180deg,transparent 0,#000 22px)}
 .term__prompt{display:flex;align-items:center;gap:.6rem;border-top:1px solid var(--line);padding:.8rem 1.2rem;background:#0c0f14}
 .term__ps1{font-family:var(--font-m);font-size:.8rem;color:var(--accent)}
 #termInput{flex:1;background:transparent;border:0;outline:0;color:var(--text);font-family:var(--font-m);font-size:.82rem}
@@ -352,8 +370,22 @@ body.ready .detect__tag{opacity:1;transform:none}
   .nav__burger{display:flex}
   .contacts{grid-template-columns:1fr}
   .footer__grid{flex-direction:column;align-items:flex-start;gap:.8rem}
-  .term__body{height:280px}
   .hero{padding-top:6.2rem}
+
+  /* terminal: lega & gampang dibaca di layar HP */
+  .term__body{height:340px;padding:1rem .9rem 1.6rem;font-size:.82rem;line-height:1.85;scroll-padding-bottom:1.6rem}
+  .term__body .t-line{padding-left:2.6ch;text-indent:-2.6ch}
+  .term__bar{padding:.6rem .8rem;font-size:.62rem;gap:.4rem}
+  .term__bar span:nth-child(4){margin-left:.2rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .term__badge{letter-spacing:.1em}
+  .term__prompt{padding:.7rem .9rem}
+  .term__ps1{font-size:.74rem}
+  #termInput{font-size:.8rem}
+  .term__quick{gap:.4rem}
+  .term__quick button{padding:.34rem .6rem;font-size:.68rem}
+  .term__howto{flex-direction:column;align-items:flex-start;gap:.4rem;font-size:.7rem}
+  .howto__arrow{display:none}
+  .hero__target{font-size:.66rem;letter-spacing:.08em;line-height:1.7}
 }
 @media (max-width:480px){
   .infobar__grid{grid-template-columns:1fr}

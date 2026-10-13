@@ -194,6 +194,27 @@
     }
   ];
 
+  /* Badge & sertifikasi — item resmi dari lembaga. */
+  const BADGES = [
+    {
+      issuer: 'Google Cloud',
+      title: 'Engineer AI Agents with Agent Development Kit (ADK)',
+      level: 'Skill badge · Intermediate',
+      cat: 'Artificial Intelligence',
+      date: '2026',
+      img: 'assets/badges/adk-badge.jpg',
+      evidence: 'assets/badges/adk-badge-email.jpg',
+      desc: 'Kelas dan ujian dari Google Cloud tentang merancang agent AI dengan Agent Development Kit — termasuk pola mengombinasikan beberapa agent dengan peran berbeda dalam satu sistem.',
+      learn: [
+        'Menyusun agent: model, instruksi, tools, dan sesi',
+        'Membuat tool sendiri lewat function calling',
+        'Pola multi-agent: critic menilai, reviser memperbaiki',
+        'Membaca trace eksekusi untuk menelusuri perilaku agent'
+      ],
+      proof: 'Diterima via email resmi Google Cloud'
+    }
+  ];
+
   const BOOT_LINES = [
     { t: 'FAIRUS.SYS v2.6.0 — boot sequence', cls: 'dim' },
     { t: 'loading kernel modules ......... [OK]' },
@@ -472,6 +493,50 @@
     }), { threshold: 0.6 });
     counters.forEach((c) => cio.observe(c));
   } else counters.forEach((c) => c.textContent = String(+c.dataset.count).padStart(+(c.dataset.pad || 0), '0'));
+
+  /* ─────────── BADGE / TROPHY CASE ─────────── */
+  const badgeCase = $('#badgeCase');
+  if (badgeCase && BADGES.length) {
+    badgeCase.innerHTML = BADGES.map((b, i) => `
+      <figure class="medal reveal" data-badge="${i}" tabindex="0" role="button" aria-label="Lihat bukti badge: ${esc(b.title)}">
+        <div class="medal__shine" aria-hidden="true"></div>
+        <div class="medal__imgwrap"><img class="medal__img" src="${b.img}" alt="Badge ${esc(b.title)}" loading="eager" decoding="async"></div>
+      </figure>
+    `).join('') + `
+      <div class="badgeinfo reveal">
+        <span class="badgeinfo__issuer">${esc(BADGES[0].issuer)} · ${esc(BADGES[0].cat)}</span>
+        <h3>${esc(BADGES[0].title)}</h3>
+        <div class="badgeinfo__meta">
+          <span>Diterbitkan ${esc(BADGES[0].date)}</span>
+          <span>Level ${esc(BADGES[0].level.split('·')[1]?.trim() || 'Intermediate')}</span>
+        </div>
+        <p>${esc(BADGES[0].desc)}</p>
+        <ul>${BADGES[0].learn.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>
+        <div class="badgeinfo__foot">
+          <button class="btn btn--small" id="badgeProofBtn" type="button">Lihat email {esc(BADGES[0].date)}</button>
+        </div>
+      </div>
+    `;
+
+    const openBadgeProof = () => {
+      const lb = $('#lightbox');
+      if (!lb) return;
+      $$('.gal__item').length; // noop
+      const img = $('#lbImg');
+      if (img) { img.src = BADGES[0].evidence; img.alt = 'Bukti email badge: ' + BADGES[0].title; }
+      const cap = $('#lbCap'); if (cap) cap.textContent = 'Email resmi Google Cloud — ' + BADGES[0].title;
+      const cnt = $('#lbCount'); if (cnt) cnt.textContent = '';
+      lb.hidden = false;
+      document.body.classList.add('lb-open');
+      lb.setAttribute('data-src', BADGES[0].evidence);
+    };
+    const proofBtn = $('#badgeProofBtn');
+    if (proofBtn) proofBtn.addEventListener('click', openBadgeProof);
+    $$('.medal', badgeCase).forEach((el) => {
+      el.addEventListener('click', openBadgeProof);
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openBadgeProof(); } });
+    });
+  }
 
   /* ─────────── PROJECT CARDS ─────────── */
   const grid = $('#projectGrid');

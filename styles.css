@@ -169,7 +169,8 @@ body.ready .detect__tag{opacity:1;transform:none}
 .infobar__grid>div:first-child{border-left:0}
 .infobar .k{font-family:var(--font-m);font-size:.62rem;letter-spacing:.2em;color:var(--dim)}
 .infobar .v{font-family:var(--font-m);font-size:.76rem;letter-spacing:.04em;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.infobar .v--wrap{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.5}
+.infobar .v--wrap{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.5;text-wrap:balance}
+.hero__target{text-wrap:balance}
 .v--live{color:var(--accent)!important}
 .v--live i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:.5rem;animation:pulse 2s ease infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--accent-soft)}50%{box-shadow:0 0 0 6px transparent}}
